@@ -2,7 +2,8 @@
   "detector": "venue_date",
   "movie": "Namit Malhotra's Ramayana",
   "requested_date": "20261105",
-  "venue_code": "NBBL",
+  "venue_codes": ["NRBL", "NBBL"],
   "venue_label": "Navrang Theatre: Rajaji Nagar, Bengaluru",
+  "theatre": "navrang",
   "url_template": "https://in.bookmyshow.com/movies/bengaluru/namit-malhotras-ramayana/buytickets/ET00523246/{date}?etCodes=*&language=kannada&refEventCode=ET00523246"
 }
