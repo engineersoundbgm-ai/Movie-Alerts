@@ -189,21 +189,26 @@ def is_available_bms_date(page_text, cfg):
 
 
 def is_available_venue_date(page_text, cfg):
-    """
-    Theatre-specific detector: is a given venue bookable on a given date?
+    """Multi-signal detector to ensure Navrang / NBBL is never missed."""
+    date = str(cfg.get("requested_date", ""))
+    codes = cfg.get("venue_codes") or ([cfg["venue_code"]] if cfg.get("venue_code") else ["NBBL"])
+    page_lower = page_text.lower()
 
-    BMS renders a per-venue booking link like
-        /cinemas/chennai/<slug>/buytickets/<venueCode>/<date>
-    only when that venue has live shows for that exact date. Because the date
-    is baked into the link, it can't be confused with the silent fallback
-    (a fallback page carries /<code>/<fallbackDate>, not /<code>/<ourDate>).
+    # 1. Booking link pattern (e.g. /nbbl/20261105 or /NBBL/20261105)
+    for code in codes:
+        if f"/{code.lower()}/{date}" in page_lower:
+            return True
 
-    Set venue_code (one) or venue_codes (list). With a list, it's open when
-    ANY of them is bookable for the date.
-    """
-    date = cfg["requested_date"]
-    codes = cfg.get("venue_codes") or [cfg["venue_code"]]
-    return any("/{}/{}".format(code, date) in page_text for code in codes)
+    # 2. Venue code in JSON / state attributes (e.g. "NBBL" or "venueCode":"NBBL")
+    for code in codes:
+        if f'"{code.lower()}"' in page_lower:
+            return True
+
+    # 3. Direct theatre name keyword check
+    if "navrang" in page_lower:
+        return True
+
+    return False
 
 
 def is_available(page_text, cfg):
