@@ -1,9 +1,8 @@
 {
   "detector": "venue_date",
-  "movie": "Spider-Man: Brand New Day",
-  "requested_date": "20260730",
-  "venue_code": "INTO",
-  "venue_label": "INOX: The Marina Mall, OMR",
-  "url_template": "https://in.bookmyshow.com/movies/chennai/spiderman-brand-new-day/buytickets/ET00502600/{date}",
-  "min_references": 10
+  "movie": "Namit Malhotra's Ramayana",
+  "requested_date": "20261105",
+  "venue_code": "NBBL",
+  "venue_label": "Navrang Theatre: Rajaji Nagar, Bengaluru",
+  "url_template": "https://in.bookmyshow.com/movies/bengaluru/namit-malhotras-ramayana/buytickets/ET00523246/{date}?etCodes=*&language=kannada&refEventCode=ET00523246"
 }
